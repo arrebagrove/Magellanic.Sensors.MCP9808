@@ -2,17 +2,24 @@
 This is a C# implementation of code whick integrates the MCP8908 temperature sensor with Windows 10 IoT Core on the Raspberry Pi 3.
 
 ## Getting started
-To build this project, you'll need the Magellanic.I2C project also.
+To build this project, you'll need the Magellanic.I2C project also (this is a NuGet package which is referenced in the project, so you may need to restore NuGet packages in your solution).
 
-You should reference the Magellanic.Sensors.MCP8908 and Magellanic.I2C projects in your Visual Studio solution. The MCP8908 can be used with the following sample code:
+You should reference the Magellanic.Sensors.MCP8908 in your Visual Studio solution. The MCP8908 can be used with the following sample code:
 
 ```C#
 var temperatureSensor = new MCP9808();
 
+await temperatureSensor.Initialize();
 
-while (true)
-{  
-    Debug.WriteLine(temperatureSensor.GetTemperature());  
-    Task.Delay(1000).Wait();  
-}   
+if (temperatureSensor.IsConnected())
+{
+    while(true)
+    {
+        var temperature = temperatureSensor.GetTemperature();
+
+        Debug.WriteLine("Temperature = " + temperature);
+
+        Task.Delay(1000).Wait();
+    }
+}
 ```
