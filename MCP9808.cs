@@ -53,7 +53,7 @@ namespace Magellanic.Sensors.MCP9808
 
             if (Convert.ToByte(upperByte & 0x10) == 0x10)
             {
-                upperByte = Convert.ToByte(upperByte & 0x0F);
+                processedUpperByte = Convert.ToByte(upperByte & 0x0F);
                 return 256 - (processedUpperByte * 16f + processedLowerByte / 16f);
             }
             else
