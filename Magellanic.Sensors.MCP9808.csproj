@@ -112,12 +112,6 @@
     <EmbeddedResource Include="Properties\Magellanic.Sensors.MCP9808.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Magellanic.I2C\Magellanic.I2C.csproj">
-      <Project>{938d8290-e3c9-4603-a289-b35da204d178}</Project>
-      <Name>Magellanic.I2C</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <SDKReference Include="WindowsIoT, Version=10.0.10586.0">
       <Name>Windows IoT Extensions for the UWP</Name>
     </SDKReference>
