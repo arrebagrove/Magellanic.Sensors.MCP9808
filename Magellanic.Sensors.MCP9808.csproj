@@ -116,6 +116,12 @@
       <Name>Windows IoT Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Magellanic.I2c\Magellanic.I2C.csproj">
+      <Project>{938d8290-e3c9-4603-a289-b35da204d178}</Project>
+      <Name>Magellanic.I2C</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

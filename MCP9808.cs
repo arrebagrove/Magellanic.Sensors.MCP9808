@@ -15,7 +15,12 @@ namespace Magellanic.Sensors.MCP9808
 
         public MCP9808()
         {
-            this.Initialize(I2C_ADDRESS);
+            this.DeviceIdentifier = new byte[2] { 0x04, 0x00 };
+        }
+
+        public override byte GetI2cAddress()
+        {
+            return I2C_ADDRESS;
         }
 
         public int GetManufacturerId()
@@ -27,13 +32,13 @@ namespace Magellanic.Sensors.MCP9808
             return BitConverter.ToUInt16(readBuffer, 0);
         }
 
-        public int GetDeviceId()
+        public override byte[] GetDeviceId()
         {
-            byte[] readBuffer = new byte[2];
+            byte[] deviceIdentifierBuffer = new byte[2];
 
-            this.Slave.WriteRead(DeviceIdAddress, readBuffer);
+            this.Slave.WriteRead(DeviceIdAddress, deviceIdentifierBuffer);
 
-            return BitConverter.ToUInt16(readBuffer, 0);
+            return deviceIdentifierBuffer;
         }
 
         public float GetTemperature()
