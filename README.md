@@ -7,19 +7,39 @@ To build this project, you'll need the Magellanic.I2C project also (this is a Nu
 You should reference the Magellanic.Sensors.MCP8908 in your Visual Studio solution. The MCP8908 can be used with the following sample code:
 
 ```C#
-var temperatureSensor = new MCP9808();
-
-await temperatureSensor.Initialize();
-
-if (temperatureSensor.IsConnected())
+public sealed partial class MainPage : Page
 {
-    while(true)
+    public MainPage()
     {
-        var temperature = temperatureSensor.GetTemperature();
+        this.InitializeComponent();
+ 
+        Loaded += MainPage_Loaded;
+    }
+ 
+    private async void MainPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+    {
+        try
+        {
+            var temperatureSensor = new MCP9808();
 
-        Debug.WriteLine("Temperature = " + temperature);
+            await temperatureSensor.Initialize();
 
-        Task.Delay(1000).Wait();
+            if (temperatureSensor.IsConnected())
+            {
+                while(true)
+                {
+                    var temperature = temperatureSensor.GetTemperature();
+            
+                    Debug.WriteLine("Temperature = " + temperature);
+            
+                    Task.Delay(1000).Wait();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
     }
 }
 ```
